@@ -4,54 +4,48 @@ require "shnotes/notes"
 
 module Shnotes
   class NotesTest < Test::Unit::TestCase
-    include Shnotes
-
     setup do
-      @test_file = Tempfile.new("test_notes.pstore")
-      Notes.store_location = @test_file.path
+      @temp_file = Tempfile.new("test_notes.pstore")
     end
 
     teardown do
-      @test_file.close(true)
+      @temp_file.close(true)
     end
 
     context "with no content" do
+      setup do
+        @notes = Shnotes::Notes.new(@temp_file.path)
+      end
+
       should "contain empty hash" do
-        assert_equal({}, Notes.notes)
+        assert_equal({}, @notes.all_notes)
       end
 
       should "store a note" do
-        assert_equal "foo", Notes.put_note(1, "foo")
-        assert_equal({1 => "foo"}, Notes.notes)
-      end
-
-      should "clear all notes" do
-        # we must test clearing all notes here since the next context depends
-        # on it
-        Notes.put_note(3, "zap")
-        assert_equal({3 => "zap"}, Notes.notes)
-        assert_equal({}, Notes.clear_notes)
-        assert_equal({}, Notes.notes)
+        assert_equal "foo", @notes.put_note(1, "foo")
+        assert_equal({1 => "foo"}, @notes.all_notes)
       end
     end
 
     context "with content" do
       setup do
-        Notes.put_note(1, "bar")
-        Notes.put_note(2, "zag")
-      end
-
-      teardown do
-        Notes.clear_notes
+        @notes = Shnotes::Notes.new(@temp_file.path)
+        @notes.put_note(1, "bar")
+        @notes.put_note(2, "zag")
       end
 
       should "have proper contents" do
-        assert_equal({1 => "bar", 2 => "zag"}, Notes.notes)
+        assert_equal({1 => "bar", 2 => "zag"}, @notes.all_notes)
       end
 
       should "delete a note" do
-        assert_equal "bar", Notes.delete_note(1)
-        assert_equal({2 => "zag"}, Notes.notes)
+        assert_equal "bar", @notes.delete_note(1)
+        assert_equal({2 => "zag"}, @notes.all_notes)
+      end
+
+      should "clear all notes" do
+        assert_equal({}, @notes.clear_notes)
+        assert_equal({}, @notes.all_notes)
       end
     end
   end
