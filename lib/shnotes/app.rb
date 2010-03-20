@@ -37,6 +37,9 @@ module Shnotes
       {:id => id, :note => note}.to_json
     end
 
+    # put "/:id" for replacing an existing note with new content does not make
+    # sense for this application because the hash would be different
+
     delete "/:id" do
       note = App.notes.delete_note(params[:id])
       not_found "No such note" unless note
