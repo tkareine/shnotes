@@ -93,5 +93,13 @@ module Shnotes
         assert_equal 404, last_response.status
       end
     end
+
+    context "for caching behavior" do
+      should "use etag for a note if HTTP_IF_NONE_MATCH is used in request" do
+        get "/8f53a87af2f1207ab9b9aaaf354f9855", {}, {"HTTP_IF_NONE_MATCH" => '"8f53a87af2f1207ab9b9aaaf354f9855"'}
+        assert_equal 304, last_response.status
+        assert last_response.body.empty?
+      end
+    end
   end
 end

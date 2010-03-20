@@ -22,8 +22,10 @@ module Shnotes
     end
 
     get "/:id" do
-      note = App.notes.all_notes[params[:id]]
+      id = params[:id]
+      note = App.notes.all_notes[id]
       not_found "No such note" unless note
+      etag id
       note.to_json
     end
 
