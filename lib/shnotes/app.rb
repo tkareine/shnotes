@@ -13,6 +13,10 @@ module Shnotes
 
     @notes = Shnotes::Notes.new
 
+    before do
+      content_type :json, :charset => "utf-8"
+    end
+
     get "/" do
       App.notes.all_notes.to_json
     end
