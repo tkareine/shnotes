@@ -11,7 +11,7 @@ module Shnotes
       attr_accessor :notes
     end
 
-    @notes = Shnotes::Notes.new
+    @notes = Shnotes::Notes.init_db(:pstore)
 
     before do
       content_type :json, :charset => "utf-8"

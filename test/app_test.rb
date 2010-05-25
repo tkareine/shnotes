@@ -21,7 +21,7 @@ module Shnotes
 
     setup do
       @tempfile = Tempfile.new("notes_fixture.pstore")
-      @notes = Shnotes::Notes.new(create_notes_file)
+      @notes = Shnotes::Notes.init_db(:pstore, create_notes_file)
     end
 
     teardown do
