@@ -35,13 +35,13 @@ module Shnotes
     end
 
     should "have #{NUM_NOTES_INITIALLY} notes initially (test sanity check)" do
-      assert_equal NUM_NOTES_INITIALLY, @notes.all_notes.size
+      assert_equal NUM_NOTES_INITIALLY, @notes.all.size
     end
 
     context "for valid requests" do
       should "show all notes" do
         get "/"
-        assert_equal @notes.all_notes.to_json, last_response.body
+        assert_equal @notes.all.to_json, last_response.body
       end
 
       should "show a note" do
@@ -54,7 +54,7 @@ module Shnotes
         expected_id = Digest::MD5.hexdigest(note)
         post "/", :note => note
         assert_equal({:id => expected_id, :note => note}.to_json, last_response.body)
-        assert_equal NUM_NOTES_INITIALLY + 1, @notes.all_notes.size
+        assert_equal NUM_NOTES_INITIALLY + 1, @notes.all.size
       end
 
       should "strip whitespace around the note when creating a new note" do
@@ -62,13 +62,13 @@ module Shnotes
         expected_id = Digest::MD5.hexdigest(note.strip)
         post "/", :note => note
         assert_equal({:id => expected_id, :note => note.strip}.to_json, last_response.body)
-        assert_equal NUM_NOTES_INITIALLY + 1, @notes.all_notes.size
+        assert_equal NUM_NOTES_INITIALLY + 1, @notes.all.size
       end
 
       should "remove a note" do
         delete "/8f53a87af2f1207ab9b9aaaf354f9855"
         assert_equal "hopefully it isn't chris's blood".to_json, last_response.body
-        assert_equal NUM_NOTES_INITIALLY - 1, @notes.all_notes.size
+        assert_equal NUM_NOTES_INITIALLY - 1, @notes.all.size
       end
     end
 

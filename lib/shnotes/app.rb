@@ -18,12 +18,12 @@ module Shnotes
     end
 
     get "/" do
-      App.notes.all_notes.to_json
+      App.notes.all.to_json
     end
 
     get "/:id" do
       id = params[:id]
-      note = App.notes.all_notes[id]
+      note = App.notes[id]
       not_found "No such note" unless note
       etag id
       note.to_json
@@ -35,7 +35,7 @@ module Shnotes
       note.strip!
       error 400, "Not a valid note" if blank? note
       id = Digest::MD5.hexdigest(note)
-      App.notes.put_note(id, note)
+      App.notes[id] = note
       {:id => id, :note => note}.to_json
     end
 
@@ -43,7 +43,7 @@ module Shnotes
     # sense for this application because the hash would be different
 
     delete "/:id" do
-      note = App.notes.delete_note(params[:id])
+      note = App.notes.delete(params[:id])
       not_found "No such note" unless note
       note.to_json
     end

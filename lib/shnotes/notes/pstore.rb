@@ -9,27 +9,31 @@ module Shnotes
         @path = path
       end
 
-      def put_note(id, note)
+      def [](id)
+        all[id]
+      end
+
+      def []=(id, note)
         store.transaction do
           store[:notes] ||= {}
           store[:notes][id] = note
         end
       end
 
-      def delete_note(id)
+      def delete(id)
         store.transaction do
           store[:notes] ||= {}
           store[:notes].delete(id)
         end
       end
 
-      def all_notes
+      def all
         store.transaction do
           store[:notes] ||= {}
         end
       end
 
-      def clear_notes
+      def clear
         store.transaction do
           store[:notes] = {}
         end
