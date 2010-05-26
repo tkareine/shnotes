@@ -15,21 +15,25 @@ Run the server:
 
     $ rake run:thin
 
-Use any client that speaks HTTP, such as
-[rest-client](http://rdoc.info/projects/archiloque/rest-client), to play
+Use any client that speaks HTTP, such as [cURL](http://curl.haxx.se/), to play
 with the service:
 
-    $ restclient http://localhost:4567
+    $ curl -X GET http://localhost:4567/
+    {}
 
-    > get('/').body
-    # => "{}"
-    > post('/', {:note => "zomg"}).body
-    # => "{\"id\":\"22487fae2a1d945fdee78f72524fe263\",\"note\":\"zomg\"}"
-    > get('/').body
-    # => "{\"22487fae2a1d945fdee78f72524fe263\":\"zomg\"}"
-    > delete('/22487fae2a1d945fdee78f72524fe263').body
-    # => "\"zomg\""
-    > get('/').body
-    # => "{}"
+    $ curl -X POST http://localhost:4567/ -d note="i'm in your notes, noting"
+    {"id":"6612921f3d192ac0ceaa49ccb473d456","note":"i'm in your notes, noting"}
+
+    $ curl -X POST http://localhost:4567/ -d note="lame note"
+    {"id":"83a129e12aa9375495d37fa07df0222e","note":"lame note"}
+
+    $ curl -X GET http://localhost:4567/
+    {"6612921f3d192ac0ceaa49ccb473d456":"i'm in your notes, noting","83a129e12aa9375495d37fa07df0222e":"lame note"}
+
+    $ curl -X DELETE http://localhost:4567/83a129e12aa9375495d37fa07df0222e
+    "lame note"
+
+    $ curl -X GET http://localhost:4567/
+    {"6612921f3d192ac0ceaa49ccb473d456":"i'm in your notes, noting"}
 
 See tests for more.
