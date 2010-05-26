@@ -19,6 +19,7 @@ The following gems are required:
 * redis (if you use it)
 * shotgun (for development)
 * sinatra
+* thin (an easy deployment option)
 
 Usage example
 -------------
