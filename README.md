@@ -2,8 +2,10 @@ Shnotes
 =======
 
 A simple RESTful web service for storing notes, made for demonstration
-purposes. It uses [Sinatra](http://www.sinatrarb.com/) and
-[PStore](http://www.ruby-doc.org/ruby-1.9/classes/PStore.html).
+purposes. It uses [Sinatra](http://www.sinatrarb.com/) as a thin application
+layer between the REST interface and the database. There are two options for
+the database type: [Redis](http://code.google.com/p/redis/) and
+[PStore](http://www.ruby-doc.org/ruby-1.9/classes/PStore.html) (the default).
 
 Notes are plain text, identified by their MD5 hash code. The service responds
 with JSON data when a request is successful.
