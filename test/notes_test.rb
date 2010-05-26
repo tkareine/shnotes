@@ -3,6 +3,10 @@ require "shnotes/notes"
 
 module Shnotes
   class NotesTest < Test::Unit::TestCase
+    should "raise error if unknown database type" do
+      assert_raise(ArgumentError) { Shnotes::Notes.init_db(:no_such_db) }
+    end
+
     context "for PStore instance" do
       setup do
         @temp_file = Tempfile.new("test_notes.pstore")
