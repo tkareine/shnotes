@@ -4,13 +4,13 @@ module Shnotes
       case db_type.to_sym
       when :pstore
         require "shnotes/notes/pstore"
-        Notes::PStore.new(*args)
+        Notes::PStore
       when :redis
         require "shnotes/notes/redis"
-        Notes::Redis.new(*args)
+        Notes::Redis
       else
         raise ArgumentError, "Unknown database type"
-      end
+      end.new(*args)
     end
   end
 end
