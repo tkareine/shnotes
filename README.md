@@ -10,6 +10,16 @@ the database type: [Redis](http://code.google.com/p/redis/) and
 Notes are plain text, identified by their MD5 hash code. The service responds
 with JSON data when a request is successful.
 
+The following gems are required:
+
+* contest (for tests)
+* json (for Ruby 1.8)
+* rack
+* rack-test (for tests)
+* redis (if you use it)
+* sinatra
+* shotgun (for development)
+
 Usage example
 -------------
 
