@@ -17,8 +17,8 @@ The following gems are required:
 * rack
 * rack-test (for tests)
 * redis (if you use it)
-* sinatra
 * shotgun (for development)
+* sinatra
 
 Usage example
 -------------
