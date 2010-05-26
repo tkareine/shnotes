@@ -16,7 +16,7 @@ module Shnotes
       },
       :redis  => {
         :type      => Shnotes::Notes::Redis,
-        :init_args => [{:db => 1}]
+        :init_args => [{:db => 1, :port => 6399}]
       }
     }.each do |db_type, spec|
       context "for #{spec[:type]} instance" do

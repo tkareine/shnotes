@@ -12,6 +12,27 @@ namespace :run do
   end
 end
 
+namespace :redis do
+  REDIS_DIR = File.expand_path("../test", __FILE__)
+  REDIS_CNF = File.join(REDIS_DIR, "redis_test.conf")
+  REDIS_PID = File.join(REDIS_DIR, "data", "redis.pid")
+
+  desc "Start Redis server for tests"
+  task :start do
+    unless File.exists? REDIS_PID
+      system "redis-server #{REDIS_CNF}"
+    end
+  end
+
+  desc "Stop Redis server for tests"
+  task :stop do
+    if File.exists? REDIS_PID
+      system "kill #{File.read(REDIS_PID)}"
+      system "rm #{REDIS_PID}"
+    end
+  end
+end
+
 require "rake/testtask"
 desc "Run tests"
 Rake::TestTask.new(:test) do |t|
@@ -22,4 +43,7 @@ Rake::TestTask.new(:test) do |t|
   t.libs << "test"
 end
 
-task :default => :test
+desc "Run tests with Redis server starting and stopping"
+task :test_with_redis => [:"redis:start", :test, :"redis:stop"]
+
+task :default => :test_with_redis
