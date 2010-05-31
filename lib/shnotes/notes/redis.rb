@@ -22,7 +22,7 @@ module Shnotes
       end
 
       def all
-        keys = @store.keys(note_identity('*')).split(' ')
+        keys = @store.keys(note_identity('*'))
         result = {}
         return result if keys.empty?
         # do not use Redis#mapped_mget, since we want to have control over the
