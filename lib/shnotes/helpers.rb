@@ -1,3 +1,5 @@
+# coding: utf-8
+
 module Shnotes
   module Helpers
     def blank?(str)

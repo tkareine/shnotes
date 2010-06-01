@@ -1,3 +1,5 @@
+# coding: utf-8
+
 module Shnotes
   module Notes
     def self.init_db(db_type, *args)

@@ -1,3 +1,5 @@
+# coding: utf-8
+
 SERVER_PORT = 4567
 
 namespace :run do

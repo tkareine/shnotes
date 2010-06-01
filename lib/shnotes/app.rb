@@ -1,3 +1,5 @@
+# coding: utf-8
+
 require "sinatra/base"
 require "digest/md5"
 require "json"
