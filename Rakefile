@@ -15,7 +15,7 @@ namespace :run do
 end
 
 namespace :redis do
-  REDIS_DIR = File.expand_path("../test", __FILE__)
+  REDIS_DIR = File.expand_path("test", File.dirname(__FILE__))
   REDIS_CNF = File.join(REDIS_DIR, "redis_test.conf")
   REDIS_PID = File.join(REDIS_DIR, "data", "redis.pid")
 
