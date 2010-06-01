@@ -39,7 +39,7 @@ Usage example
 
 Run the server:
 
-    $ rake run:thin
+    $ rake run:prod
 
 Use any client that speaks HTTP, such as [cURL](http://curl.haxx.se/), to play
 with the service:
