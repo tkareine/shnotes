@@ -10,6 +10,14 @@ the database type: [Redis](http://code.google.com/p/redis/) and
 Notes are plain text, identified by their MD5 hash code. The service responds
 with JSON data when a request is successful.
 
+Installation
+------------
+
+Get the code:
+
+    $ git clone git://github.com/tuomas/shnotes.git
+    $ cd shnotes
+
 The following gems are required:
 
 * contest (for tests)
@@ -20,6 +28,11 @@ The following gems are required:
 * shotgun (for development)
 * sinatra
 * thin (an easy deployment option)
+
+Use [Bundler](http://gembundler.com/) to manage them:
+
+    $ gem install bundler
+    $ bundle install
 
 Usage example
 -------------
