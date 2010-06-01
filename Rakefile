@@ -3,14 +3,14 @@
 SERVER_PORT = 4567
 
 namespace :run do
-  desc "Run the server with Thin web server, reloading on each request"
+  desc "Run the server with Thin web server in development environment, reloading on each request"
   task :dev do
-    sh %{shotgun -r rubygems -p #{SERVER_PORT} -s thin config.ru}
+    sh %{shotgun -E development -r rubygems -p #{SERVER_PORT} -s thin config.ru}
   end
 
-  desc "Run the server with Thin web server"
-  task :thin do
-    sh %{thin -r rubygems -p #{SERVER_PORT} -R config.ru start}
+  desc "Run the server with Thin web server in production environment"
+  task :prod do
+    sh %{thin -e production -r rubygems -p #{SERVER_PORT} -R config.ru start}
   end
 end
 
