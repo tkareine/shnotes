@@ -1,6 +1,6 @@
 # coding: utf-8
 
 require "bundler"
-Bundler.setup
+Bundler.setup(:default, :test)
 
 require "contest"
