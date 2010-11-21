@@ -15,7 +15,7 @@ Installation
 
 Get the code:
 
-    $ git clone git://github.com/tuomas/shnotes.git
+    $ git clone git://github.com/tkareine/shnotes.git
     $ cd shnotes
 
 The following gems are required:
